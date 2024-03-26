@@ -18,12 +18,16 @@ export default function CardProduct({
 	return (
 		<Card
 			onClick={onClick}
-			className="max-w-sm cursor-pointer"
-			imgAlt="Apple Watch Series 7 in colors pink, silver, and black"
-			imgSrc={image}
+			className="max-w-sm cursor-pointer "
+			renderImage={() => (
+				<img
+					src={image}
+					className="h-[300px] object-cover overflow-hidden"
+				/>
+			)}
 		>
 			<a href="#">
-				<h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+				<h5 className="line-clamp-1 text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
 					{title}
 				</h5>
 			</a>

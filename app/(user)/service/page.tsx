@@ -16,10 +16,10 @@ export default function page() {
 			.then((data) => setProducts(data));
 	}, []);
 	return (
-		<div className="h-screen flex flex-wrap justify-center gap-3">
+		<div className="h-screen mt-6 container mx-auto grid grid-cols-5 grid-flow-row gap-4">
 			{products.map((product: any, index) => (
 				<CardProduct
-          onClick={() => router.push(`/service/${product.id}`)}
+					onClick={() => router.push(`/service/${product.id}`)}
 					key={index}
 					title={product.title}
 					image={product.image}
