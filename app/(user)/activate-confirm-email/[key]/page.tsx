@@ -22,6 +22,9 @@ export default function ConfirmEmail(props: Props) {
 				<p className="text-3xl">
 					Your email comfirmed! you can go to login page by press below button!
 				</p>
+        <p className="text-3xl my-4">
+					សូមអរគុណសម្រាប់ការបញ្ជាក់អ៊ីមែល! អ្នកអាចចូលទៅទំព័រចូលដោយចុចលើប៊ូតុងខាងក្រោយ!
+				</p>
 				{/* Button */}
 				<Button title="Login" classname="my-8" />
 			</section>
