@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 	openGraph: {
 		title: "ISTAD Ecommerce Web",
 		description: "ISTAD Ecommerce Web is a web application for selling products.",
-		// images: 'https://store.istad.co/media/brand_images/sokea_AF6QosU.jpg'
+		images: 'https://store.istad.co/media/brand_images/sokea_AF6QosU.jpg'
 	}
 }
 
