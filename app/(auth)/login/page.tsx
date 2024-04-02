@@ -25,11 +25,17 @@ const initialValues: ValueTypes = {
 	last_name: "",
 };
 
+// 1- At least one upper case English letter, (?=.*[A-Z])
+// 2- At least one lower case English letter, (?=.*[a-z])
+// 3- At least one digit, (?=.*\d)
+// 4- At least one special character, (?=.*[@#$%^&*])
+const strongPasswordRegex = new RegExp("^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&*]).{8,}$");
+
 const validationSchema = Yup.object().shape({
 	email: Yup.string().email("Invalid email").required("Required"),
 	password1: Yup.string()
 		.min(8, "Password is too short, At lease 8 characters")
-		.required("Required"),
+		.matches(strongPasswordRegex, "Password must contain at least one upper case English letter, one lower case English letter, one digit and one special character").required("Required"),
 	password2: Yup.string()
 		.oneOf([Yup.ref("password1")], "Passwords must match")
 		.required("Required"),
