@@ -10,6 +10,7 @@ import {
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { MenuList } from "./menu";
+import { useAppSelector } from "@/redux/hooks";
 
 type MenuItem = {
 	name: string;
@@ -18,6 +19,7 @@ type MenuItem = {
 };
 
 export default function NavbarComponent() {
+	const count = useAppSelector((state) => state.counter.value);
 	const pathname = usePathname();
 	const [menu, setMenu] = useState<MenuItem[]>(MenuList);
 
@@ -48,7 +50,7 @@ export default function NavbarComponent() {
 					alt="Flowbite React Logo"
 				/>
 				<span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-					Flowbite React
+					Flowbite React {count}
 				</span>
 			</NavbarBrand>
 			<NavbarToggle />
