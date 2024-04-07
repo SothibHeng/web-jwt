@@ -1,5 +1,8 @@
 "use client";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/redux/hooks";
+import { useEffect } from "react";
+import { fetchUserProfile } from "@/redux/features/userProfile/userProfileSlice";
 
 // change this to null to see the error page
 // const session = null
@@ -7,6 +10,11 @@ const session = "some session data";
 
 export default function Home() {
 	const router = useRouter();
+	const dispatch = useAppDispatch();
+
+	useEffect(()=>{
+		dispatch(fetchUserProfile())
+	},[])
 
 	// error.tsx will be rendered if session is null
 	if (!session) {

@@ -6,3 +6,13 @@ export type ProductType = {
 	description: string;
 	image: string;
 };
+
+
+export type CartProductType = {
+	title: string;
+	image: string;
+	price: number;
+	id: number;
+	onClick?: () => void;
+};
+

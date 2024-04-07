@@ -9,6 +9,7 @@ const ENDPOINT = "https://fakestoreapi.com/products/";
 export default function Service() {
 	const [products, setProducts] = useState([]);
 	const router = useRouter();
+	
 
 	useEffect(() => {
 		fetch(ENDPOINT)
@@ -21,6 +22,7 @@ export default function Service() {
 				<CardProduct
 					onClick={() => router.push(`/service/${product.id}`)}
 					key={index}
+					id={product.id}
 					title={product.title}
 					image={product.image}
 					price={product.price}
