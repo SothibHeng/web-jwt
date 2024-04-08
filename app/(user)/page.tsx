@@ -3,35 +3,61 @@ import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/redux/hooks";
 import { useEffect } from "react";
 import { fetchUserProfile } from "@/redux/features/userProfile/userProfileSlice";
-
-// change this to null to see the error page
-// const session = null
-const session = "some session data";
+import { useSession, signIn, signOut } from "next-auth/react";
+import Image from "next/image";
 
 export default function Home() {
+	const { data: session } = useSession();
+	console.log(session);
 	const router = useRouter();
 	const dispatch = useAppDispatch();
 
-	useEffect(()=>{
-		dispatch(fetchUserProfile())
-	},[])
+	useEffect(() => {
+		dispatch(fetchUserProfile());
+	}, []);
 
-	// error.tsx will be rendered if session is null
+	// if user is not signed in
 	if (!session) {
-		throw new Error("Auth is required to access this resource");
+		return (
+			<main className="w-full h-screen flex flex-col justify-center items-center">
+				<p className="text-2xl mb-2">Not Signed In</p>
+				<button
+					className="bg-blue-600 py-2 px-6 rounded-md text-white mb-2"
+					onClick={() => signIn("google")}
+				>
+					Sign in with google
+				</button>
+				<button
+					className="bg-none border-gray-300 border py-2 px-6 rounded-md mb-2"
+					onClick={() => signIn("github")}
+				>
+					Sign in with github
+				</button>
+			</main>
+		);
 	}
 
 	return (
-		<main className="flex min-h-screen flex-col items-center justify-between p-24">
-			<div>
-				<h1 className="text-6xl font-medium">Home Page</h1>
-				<button
-					onClick={() => router.push("/enroll")}
-					className="p-4 bg-blue-300 rounded-xl text-2xl font-medium mt-4 text-[#333]"
-				>
-					Enroll Now
-				</button>
+		<main className="w-full h-screen flex flex-col justify-center items-center">
+			<div className="w-44 h-44 relative mb-4">
+				<Image
+					src={session.user?.image as string}
+					fill
+					alt=""
+					className="object-cover rounded-full"
+				/>
 			</div>
+			<p className="text-2xl mb-2">
+				Welcome <span className="font-bold">{session.user?.name}</span>. Signed
+				In As
+			</p>
+			<p className="font-bold mb-4">{session.user?.email}</p>
+			<button
+				className="bg-red-600 py-2 px-6 rounded-md"
+				onClick={() => signOut()}
+			>
+				Sign out
+			</button>
 		</main>
 	);
 }

@@ -8,6 +8,7 @@ import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import { inter, suwannaphum, localCustomFont } from "./fonts";
 import { Metadata } from "next";
 import StoreProvider from "../StoreProvider";
+import SessionWrapper from "../SessionProvider";
 
 export const metadata: Metadata = {
 	title: "ISTAD Ecommerce Web",
@@ -27,18 +28,20 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body
-				className={`${inter.variable} ${suwannaphum.variable} ${localCustomFont.variable}`}
-			>
-				<StoreProvider>
-					<header>
-						<NavbarComponent />
-					</header>
-					<ErrorBoundary errorComponent={Error}>
-						<Suspense fallback={<Loading />}>{children}</Suspense>
-					</ErrorBoundary>
-				</StoreProvider>
-			</body>
+			<SessionWrapper>
+				<body
+					className={`${inter.variable} ${suwannaphum.variable} ${localCustomFont.variable}`}
+				>
+					<StoreProvider>
+						<header>
+							<NavbarComponent />
+						</header>
+						<ErrorBoundary errorComponent={Error}>
+							<Suspense fallback={<Loading />}>{children}</Suspense>
+						</ErrorBoundary>
+					</StoreProvider>
+				</body>
+			</SessionWrapper>
 		</html>
 	);
 }
