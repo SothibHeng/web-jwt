@@ -43,7 +43,7 @@ const validationSchema = Yup.object().shape({
 	last_name: Yup.string().required("Required"),
 });
 
-export default function Login() {
+export default function Register() {
 	const [showPassword, setShowPassword] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const handleShowPassword = () => {
@@ -90,7 +90,7 @@ export default function Login() {
 				}}
 			>
 				<Form className="bg-gray-100 p-4 rounded-lg w-96">
-					<h1 className={`${style.title}`}>Login</h1>
+					<h1 className={`${style.title}`}>Register</h1>
 					{/* Email */}
 					<div className="mb-5">
 						<label className={`${style.label}`} htmlFor="email">
