@@ -3,6 +3,8 @@ import React, { useState } from "react";
 
 export default function TestJWT() {
   const [accessToken, setAccessToken] = useState("");
+  const[Authorized,setAuthorized]=useState(false)
+  const[refreshToken,setRefreshToken]=useState("") 
   const [user, setUser] = useState(null);
   
 
@@ -54,6 +56,26 @@ export default function TestJWT() {
     .catch((err) => {
       console.log(err)
     })
+  }
+
+
+  // handle refresh token 
+  const handleRefreshToken = async()=>{
+    fetch('http://localhost:3000/api/refresh',{
+         method: 'POST',
+         headers:{
+          'Content-Type': 'application/json',
+          'Aurthorization': `Bearer ${refreshToken}`
+         },
+         credentials: 'include',
+         body: JSON.stringify({})
+    })
+    .then(res=>res.json()).then((data)=>{
+    console.log("data from refresh token:",data)
+    setAccessToken(data.accessToken)
+    })
+    .catch(error=>console.log(error))
+   
   }
 
   return (
